@@ -1,0 +1,13 @@
+/* ==========================================================================
+   myheaders — the little the shared stylesheet does not already draw.
+   ========================================================================== */
+
+/* A policy is long, and reads as one block rather than as a value. */
+#csp-raw { word-break: break-word; direction: ltr; text-align: start }
+
+/* Redirect chains are read left to right whatever the interface language. */
+.chain-cell { font-family: var(--font-mono); direction: ltr; unicode-bidi: plaintext }
+.chain-cell .arrow { color: var(--ink-faint) }
+
+/* A header that is absent should read as absent at a glance. */
+.table td.absent { color: var(--ink-faint) }

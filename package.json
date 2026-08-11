@@ -1,0 +1,37 @@
+{
+  "name": "myheaders",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://myheaders.sharapov.biz",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharapov-outsource/myheaders.git"
+  },
+  "bugs": "https://github.com/sharapov-outsource/myheaders/issues",
+  "description": "Redirect chain, CSP taken apart directive by directive, HSTS with real preload membership, cookies, and the protocols a site actually negotiates",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "scan": "node scripts/scan-cli.js",
+    "icons": "node scripts/make-icons.js",
+    "check:i18n": "node scripts/check-i18n.js",
+    "check:syntax": "node --check public/app.js && node --check public/i18n.js && node --check server/index.js && node --check server/scan.js && node --check server/session.js && node --check server/chain.js && node --check server/headers.js && node --check server/csp.js && node --check server/hsts.js && node --check server/cookies.js && node --check server/misc.js && node --check server/protocols.js && node --check server/preload.js && node --check server/grade.js",
+    "test:unit": "node --test \"test/*.test.js\"",
+    "smoke": "node scripts/smoke.js",
+    "test": "npm run check:syntax && npm run check:i18n && npm run test:unit && npm run smoke",
+    "preload:fetch": "node scripts/fetch-preload.js"
+  },
+  "dependencies": {
+    "@fastify/rate-limit": "^10.2.2",
+    "@fastify/static": "^10.1.2",
+    "@sharapov/dns-wire": "git+https://github.com/sharapov-outsource/dns-wire.git#v1.0.0",
+    "@sharapov/service-kit": "git+https://github.com/sharapov-outsource/service-kit.git#v1.0.0",
+    "fastify": "^5.2.1",
+    "yaml": "^2.7.0"
+  }
+}
