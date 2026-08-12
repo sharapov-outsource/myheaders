@@ -140,7 +140,7 @@ nonce beside `unsafe-inline`, or a `__Host-` cookie a browser will refuse.
 The shared package is a git dependency, so `npm install` needs `git`:
 
 ```json
-"@sharapov/service-kit": "git+https://github.com/sharapov-outsource/service-kit.git#v1.4.3"
+"@sharapov/service-kit": "git+https://github.com/sharapov-outsource/service-kit.git#v1.4.4"
 ```
 
 The URL is spelled out in full because the `github:` shorthand resolves to
@@ -315,7 +315,7 @@ npm run preload:fetch                 # обновить вложенный сп
 Общий пакет подключён как git-зависимость, поэтому `npm install` требует `git`:
 
 ```json
-"@sharapov/service-kit": "git+https://github.com/sharapov-outsource/service-kit.git#v1.4.3"
+"@sharapov/service-kit": "git+https://github.com/sharapov-outsource/service-kit.git#v1.4.4"
 ```
 
 Адрес выписан полностью, потому что сокращение `github:` разворачивается в
