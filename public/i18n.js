@@ -1097,7 +1097,7 @@ OWN.pt = {
   note_csp: 'Uma política que permite script embutido não impede nada do que um script injetado faria. Nonces e hashes existem justamente para que isso nunca seja necessário — e uma política que carrega ao mesmo tempo um nonce e unsafe-inline significa duas coisas diferentes em duas gerações de navegadores.',
   note_hsts: 'A diretiva preload é um pedido, não um estado. Um site pode carregá-la por anos sem nunca ter sido submetido, então o que se mostra aqui é a participação na lista que o Chromium de fato distribui.',
   note_cookies: 'De fora só se enxergam os cookies definidos na página de entrada; um cookie de sessão emitido após o login, não. O prefixo __Host- é a única proteção de cookie que um navegador impõe em vez de apenas respeitar.',
-  note_protocols: 'O HTTP/2 é medido abrindo um handshake TLS e vendo o que o servidor escolhe. O HTTP/3 é relatado conforme anunciado em Alt-Svc — este verificador não fala QUIC, e dizer «não» seria inventar um resultado.',
+  note_protocols: 'O HTTP/2 é medido abrindo um handshake TLS e vendo o que o servidor escolhe. O HTTP/3 é relatado conforme anunciado em Alt-Svc — este verificador não fala QUIC, e dizer “não” seria inventar um resultado.',
 
   err_https_did_not_answer: 'O site não respondeu por HTTPS.',
 
@@ -1240,7 +1240,7 @@ OWN.pt = {
   fd_hsts_preload_list_not_bundled: 'Não foi possível conferir a participação, então ela é relatada como desconhecida em vez de adivinhada. Rode npm run preload:fetch para incluí-la.',
 
   flag_cookie_not_secure: 'Um cookie é definido sem Secure',
-  fd_cookie_not_secure: 'Sem Secure, o cookie também é anexado a requisições HTTP puras — que é como uma sessão sobrevive ao «HTTPS em todo lugar» e ainda assim vaza naquela única requisição que não chegou lá.',
+  fd_cookie_not_secure: 'Sem Secure, o cookie também é anexado a requisições HTTP puras — que é como uma sessão sobrevive ao “HTTPS em todo lugar” e ainda assim vaza naquela única requisição que não chegou lá.',
 
   flag_cookie_not_httponly: 'Um cookie pode ser lido por script',
   fd_cookie_not_httponly: 'Sem HttpOnly, um script injetado consegue ler o cookie. Alguns cookies são lidos de propósito pelo próprio script do site, então isto é uma pergunta e não um veredito.',
@@ -1273,7 +1273,7 @@ OWN.pt = {
   fd_no_nosniff: 'Sem nosniff, um navegador pode adivinhar que uma resposta é script quando ela foi servida como outra coisa — o que transforma um endpoint de upload num hospedeiro de scripts.',
 
   flag_nosniff_malformed: 'X-Content-Type-Options tem um valor inesperado',
-  fd_nosniff_malformed: 'O único valor com que os navegadores agem é «nosniff». Qualquer outro é ignorado.',
+  fd_nosniff_malformed: 'O único valor com que os navegadores agem é “nosniff”. Qualquer outro é ignorado.',
 
   flag_no_referrer_policy: 'Sem Referrer-Policy',
   fd_no_referrer_policy: 'Os navegadores usam strict-origin-when-cross-origin por padrão, o que é razoável — declarar isso remove a dependência desse padrão.',
@@ -2393,7 +2393,7 @@ OWN.tr = {
   note_csp: 'Satır içi betiğe izin veren bir politika, enjekte edilmiş bir betiğin yapacağı hiçbir şeyi durdurmaz. Nonce ve özetler tam da buna hiç gerek kalmasın diye vardır — hem nonce hem unsafe-inline taşıyan bir politika ise iki tarayıcı kuşağında iki ayrı anlama gelir.',
   note_hsts: 'preload direktifi bir başvurudur, bir durum değil. Bir site onu yıllarca taşıyıp hiç başvurmamış olabilir; burada gösterilen, Chromium’un gerçekten dağıttığı listedeki üyeliktir.',
   note_cookies: 'Dışarıdan yalnızca iniş sayfasında kurulan çerezler görülür; oturum açtıktan sonra verilen bir oturum çerezi görülmez. __Host- öneki, bir tarayıcının yalnızca saygı göstermek yerine zorunlu kıldığı tek çerez korumasıdır.',
-  note_protocols: 'HTTP/2, bir TLS el sıkışması açılıp sunucunun ne seçtiğine bakılarak ölçülür. HTTP/3 ise Alt-Svc’de duyurulduğu biçimde bildirilir: bu denetleyici QUIC konuşmaz ve «hayır» demek uydurma bir sonuç olurdu.',
+  note_protocols: 'HTTP/2, bir TLS el sıkışması açılıp sunucunun ne seçtiğine bakılarak ölçülür. HTTP/3 ise Alt-Svc’de duyurulduğu biçimde bildirilir: bu denetleyici QUIC konuşmaz ve “hayır” demek uydurma bir sonuç olurdu.',
 
   err_https_did_not_answer: 'Site HTTPS üzerinden yanıt vermedi.',
 
@@ -2536,7 +2536,7 @@ OWN.tr = {
   fd_hsts_preload_list_not_bundled: 'Üyelik denetlenemedi, bu yüzden tahmin edilmek yerine bilinmiyor olarak bildiriliyor. Eklemek için npm run preload:fetch çalıştırın.',
 
   flag_cookie_not_secure: 'Bir çerez Secure olmadan kuruluyor',
-  fd_cookie_not_secure: 'Secure olmadan çerez şifresiz HTTP isteklerine de iliştirilir — bir oturumun «her yerde HTTPS»i atlatıp yine de oraya varamayan o tek istekte sızması böyle olur.',
+  fd_cookie_not_secure: 'Secure olmadan çerez şifresiz HTTP isteklerine de iliştirilir — bir oturumun “her yerde HTTPS”i atlatıp yine de oraya varamayan o tek istekte sızması böyle olur.',
 
   flag_cookie_not_httponly: 'Bir çerez betikten okunabiliyor',
   fd_cookie_not_httponly: 'HttpOnly olmadan, enjekte edilmiş bir betik çerezi okuyabilir. Bazı çerezleri sitenin kendi betiği bilerek okur, dolayısıyla bu bir hükümden çok bir sorudur.',
@@ -2569,7 +2569,7 @@ OWN.tr = {
   fd_no_nosniff: 'nosniff olmadan tarayıcı, başka bir şey olarak sunulmuş bir yanıtın betik olduğunu tahmin edebilir — bu da bir yükleme uç noktasını betik barındırıcısına çevirir.',
 
   flag_nosniff_malformed: 'X-Content-Type-Options beklenmedik bir değer taşıyor',
-  fd_nosniff_malformed: 'Tarayıcıların işlem yaptığı tek değer «nosniff»tir. Diğer her şey yok sayılır.',
+  fd_nosniff_malformed: 'Tarayıcıların işlem yaptığı tek değer “nosniff”tir. Diğer her şey yok sayılır.',
 
   flag_no_referrer_policy: 'Referrer-Policy yok',
   fd_no_referrer_policy: 'Tarayıcılar öntanımlı olarak strict-origin-when-cross-origin uygular; bu makuldür — bunu bildirmek, o öntanıma bağımlılığı ortadan kaldırır.',
@@ -2717,7 +2717,7 @@ OWN.zh = {
   note_csp: '允许内联脚本的策略，拦不住注入脚本会做的任何事。nonce 和哈希的存在，正是为了让这种做法永远没有必要 — 而同时带着 nonce 和 unsafe-inline 的策略，在两代浏览器眼里是两回事。',
   note_hsts: 'preload 指令是一份申请，不是一种状态。一个站点可以带着它好几年却从未提交过，所以这里显示的是它在 Chromium 实际分发的那份列表中的收录情况。',
   note_cookies: '从外部只看得到落地页设置的 Cookie，看不到登录之后才签发的会话 Cookie。__Host- 前缀是浏览器真正强制执行、而非仅仅尊重的唯一一项 Cookie 保护。',
-  note_protocols: 'HTTP/2 的判定方式是开启一次 TLS 握手，看服务器选择什么。HTTP/3 则按 Alt-Svc 中公告的内容如实报告：本检查器不会说 QUIC，回答「否」等于编造结论。',
+  note_protocols: 'HTTP/2 的判定方式是开启一次 TLS 握手，看服务器选择什么。HTTP/3 则按 Alt-Svc 中公告的内容如实报告：本检查器不会说 QUIC，回答“否”等于编造结论。',
 
   err_https_did_not_answer: '站点未通过 HTTPS 作出响应。',
 
@@ -2860,7 +2860,7 @@ OWN.zh = {
   fd_hsts_preload_list_not_bundled: '无法核对收录情况，因此如实报告为未知，而不是靠猜。运行 npm run preload:fetch 即可补上。',
 
   flag_cookie_not_secure: '有 Cookie 在设置时没有 Secure',
-  fd_cookie_not_secure: '没有 Secure，这个 Cookie 也会被附加到明文 HTTP 请求上 — 一个会话正是这样在「全站 HTTPS」中幸存下来，却依然从那唯一一个没走到 HTTPS 的请求里泄露出去。',
+  fd_cookie_not_secure: '没有 Secure，这个 Cookie 也会被附加到明文 HTTP 请求上 — 一个会话正是这样在“全站 HTTPS”中幸存下来，却依然从那唯一一个没走到 HTTPS 的请求里泄露出去。',
 
   flag_cookie_not_httponly: '有 Cookie 可被脚本读取',
   fd_cookie_not_httponly: '没有 HttpOnly，注入的脚本就能读到这个 Cookie。有些 Cookie 本来就是给站点自己的脚本读的，所以这更像一个问题而不是一个判决。',
@@ -2893,7 +2893,7 @@ OWN.zh = {
   fd_no_nosniff: '没有 nosniff，浏览器可能把一个按别的类型提供的响应猜成脚本 — 于是一个上传接口就变成了脚本托管点。',
 
   flag_nosniff_malformed: 'X-Content-Type-Options 的取值意外',
-  fd_nosniff_malformed: '浏览器唯一会据以行动的取值是「nosniff」。其余一律忽略。',
+  fd_nosniff_malformed: '浏览器唯一会据以行动的取值是“nosniff”。其余一律忽略。',
 
   flag_no_referrer_policy: '没有 Referrer-Policy',
   fd_no_referrer_policy: '浏览器默认采用 strict-origin-when-cross-origin，这是合理的 — 明确声明可以摆脱对这个默认值的依赖。',
@@ -3365,7 +3365,7 @@ OWN.hi = {
   note_csp: 'इनलाइन स्क्रिप्ट की अनुमति देने वाली पॉलिसी वह कुछ भी नहीं रोकती जो कोई घुसाई गई स्क्रिप्ट करेगी। nonce और हैश इसीलिए हैं कि ऐसी ज़रूरत कभी न पड़े — और जिस पॉलिसी में nonce और unsafe-inline दोनों हों, उसका अर्थ ब्राउज़रों की दो पीढ़ियों में दो अलग-अलग होता है।',
   note_hsts: 'preload निर्देश एक आवेदन है, कोई स्थिति नहीं। कोई साइट उसे वर्षों तक रखे रह सकती है और कभी आवेदन ही न किया हो, इसलिए यहाँ वही दिखाया गया है कि वह उस सूची में है या नहीं जो Chromium वास्तव में बाँटता है।',
   note_cookies: 'बाहर से केवल वही कुकियाँ दिखती हैं जो आगमन-पृष्ठ पर सेट होती हैं; लॉगिन के बाद जारी होने वाली सत्र-कुकी नहीं। __Host- उपसर्ग कुकी का इकलौता ऐसा संरक्षण है जिसे ब्राउज़र केवल मानता नहीं, बाध्य करता है।',
-  note_protocols: 'HTTP/2 इस तरह मापा जाता है कि एक TLS हैंडशेक खोलकर देखा जाए कि सर्वर क्या चुनता है। HTTP/3 वैसे ही बताया जाता है जैसा Alt-Svc में घोषित है: यह जाँचकर्ता QUIC नहीं बोलता, और «नहीं» कहना गढ़ा हुआ परिणाम होता।',
+  note_protocols: 'HTTP/2 इस तरह मापा जाता है कि एक TLS हैंडशेक खोलकर देखा जाए कि सर्वर क्या चुनता है। HTTP/3 वैसे ही बताया जाता है जैसा Alt-Svc में घोषित है: यह जाँचकर्ता QUIC नहीं बोलता, और “नहीं” कहना गढ़ा हुआ परिणाम होता।',
 
   err_https_did_not_answer: 'साइट ने HTTPS पर उत्तर नहीं दिया।',
 
@@ -3508,7 +3508,7 @@ OWN.hi = {
   fd_hsts_preload_list_not_bundled: 'उपस्थिति जाँची नहीं जा सकी, इसलिए अनुमान लगाने के बजाय उसे अज्ञात बताया गया है। जोड़ने के लिए npm run preload:fetch चलाएँ।',
 
   flag_cookie_not_secure: 'एक कुकी Secure के बिना सेट होती है',
-  fd_cookie_not_secure: 'Secure के बिना वह कुकी अनएन्क्रिप्टेड HTTP अनुरोधों के साथ भी जुड़ती है — कोई सत्र «हर जगह HTTPS» से बच निकलकर भी उसी इकलौते अनुरोध से रिस जाता है जो वहाँ तक नहीं पहुँचा।',
+  fd_cookie_not_secure: 'Secure के बिना वह कुकी अनएन्क्रिप्टेड HTTP अनुरोधों के साथ भी जुड़ती है — कोई सत्र “हर जगह HTTPS” से बच निकलकर भी उसी इकलौते अनुरोध से रिस जाता है जो वहाँ तक नहीं पहुँचा।',
 
   flag_cookie_not_httponly: 'एक कुकी स्क्रिप्ट से पढ़ी जा सकती है',
   fd_cookie_not_httponly: 'HttpOnly के बिना घुसाई गई स्क्रिप्ट उस कुकी को पढ़ सकती है। कुछ कुकियाँ साइट की अपनी स्क्रिप्ट जानबूझकर पढ़ती है, इसलिए यह फ़ैसले से अधिक एक सवाल है।',
@@ -3541,7 +3541,7 @@ OWN.hi = {
   fd_no_nosniff: 'nosniff के बिना ब्राउज़र किसी ऐसे उत्तर को स्क्रिप्ट मान सकता है जो और किसी रूप में परोसा गया था — और तब अपलोड का छोर स्क्रिप्ट रखने की जगह बन जाता है।',
 
   flag_nosniff_malformed: 'X-Content-Type-Options का मान अप्रत्याशित है',
-  fd_nosniff_malformed: 'ब्राउज़र इकलौते जिस मान पर अमल करते हैं वह है «nosniff»। बाक़ी सब अनदेखा।',
+  fd_nosniff_malformed: 'ब्राउज़र इकलौते जिस मान पर अमल करते हैं वह है “nosniff”। बाक़ी सब अनदेखा।',
 
   flag_no_referrer_policy: 'Referrer-Policy नहीं है',
   fd_no_referrer_policy: 'ब्राउज़र चूक-रूप में strict-origin-when-cross-origin लगाते हैं, जो समझदारी है — उसे घोषित कर देने से उस चूक-मान पर निर्भरता हट जाती है।',
