@@ -13,6 +13,8 @@
 
 import http from 'node:http';
 import https from 'node:https';
+import dns from 'node:dns';
+import net from 'node:net';
 import { once } from 'node:events';
 
 import { pace, isPrivateAddress, allowPrivate } from '@sharapov/service-kit';
@@ -23,6 +25,53 @@ const MAX_BODY = Number(process.env.HTTP_MAX_BODY || 256 * 1024);
 const USER_AGENT = process.env.HTTP_USER_AGENT ||
   'Mozilla/5.0 (compatible; myheaders/1.0; +https://myheaders.sharapov.biz)';
 
+/* ------------------------------------------------------------------ *
+ * The guard
+ *
+ * A redirect chain goes wherever the sites in it say, and a Location header
+ * can name any address: `http://169.254.169.254/` is the metadata endpoint of
+ * the cloud this runs in, `http://127.0.0.1:6379/` is a database on the same
+ * machine. Every socket this service opens goes through the two functions
+ * below, and neither a name nor a literal address inside a private network
+ * gets one.
+ * ------------------------------------------------------------------ */
+
+function refusal(address) {
+  return Object.assign(new Error(`refused to connect to ${address}`), { code: 'PRIVATE_ADDRESS', address });
+}
+
+/**
+ * Name resolution that refuses a private answer before a connection is tried.
+ *
+ * Every address is checked, not only the first: a name that answers with one
+ * public and one private address is refused outright, because which of the two
+ * a connection ends up using is not something to leave to Happy Eyeballs. And
+ * the check is part of the lookup the socket uses, so a name that answers
+ * differently the second time it is asked — the rebinding trick — is judged on
+ * the answer it is actually connected to.
+ */
+export function guardedLookup(hostname, options, callback) {
+  if (typeof options === 'function') { callback = options; options = {}; }
+  if (typeof options === 'number') options = { family: options };
+  dns.lookup(hostname, { ...options, all: true }, (err, addresses) => {
+    if (err) return callback(err);
+    const inside = allowPrivate() ? null : addresses.find(entry => isPrivateAddress(entry.address));
+    if (inside) return callback(refusal(inside.address));
+    if (options.all) return callback(null, addresses);
+    return callback(null, addresses[0].address, addresses[0].family);
+  });
+}
+
+/**
+ * A literal address is never resolved, so no lookup ever sees it. This is the
+ * check for the address a Location header names outright; it returns the
+ * address when it must be refused, and null when it may be connected to.
+ */
+export function privateLiteral(hostname) {
+  const host = String(hostname || '').replace(/^\[|\]$/g, '');
+  return net.isIP(host) && !allowPrivate() && isPrivateAddress(host) ? host : null;
+}
+
 /**
  * @param {object} options
  * @param {string} options.url
@@ -32,9 +81,12 @@ const USER_AGENT = process.env.HTTP_USER_AGENT ||
  * @returns {Promise<object>} status, headers, timing and connection details
  */
 export async function request({ url, method = 'GET', readBody = false, headers = {} }) {
+  const target = new URL(url);
+  const literal = privateLiteral(target.hostname);
+  if (literal) return { url, ok: false, error: 'private-address', address: literal, elapsedMs: 0 };
+
   await pace('http');
 
-  const target = new URL(url);
   const secure = target.protocol === 'https:';
   const agent = secure ? https : http;
 
@@ -72,6 +124,7 @@ export async function request({ url, method = 'GET', readBody = false, headers =
        a perfectly good site of an untrusted certificate. */
     servername: secure ? target.hostname : undefined,
     setHost: false,
+    lookup: guardedLookup,
   };
 
   return new Promise(resolve => {
@@ -90,13 +143,13 @@ export async function request({ url, method = 'GET', readBody = false, headers =
 
     const client = agent.request(requestOptions);
 
-    /* The address is checked after resolution and before anything is written,
-       so a name that points inside our own network is refused rather than
-       fetched. */
+    /* The lookup refuses a private address before anything is connected; the
+       address the socket actually reached is checked once more, in case
+       anything ever reaches a socket without going through it. */
     client.on('socket', socket => {
-      socket.on('lookup', (err, address) => {
-        if (err) return;
-        if (!allowPrivate() && isPrivateAddress(address)) {
+      socket.once('connect', () => {
+        const address = socket.remoteAddress;
+        if (address && !allowPrivate() && isPrivateAddress(address)) {
           client.destroy();
           finish({ url, ok: false, error: 'private-address', address, elapsedMs: Date.now() - started });
         }
@@ -106,7 +159,9 @@ export async function request({ url, method = 'GET', readBody = false, headers =
     client.on('error', err => {
       finish({
         url, ok: false,
-        error: err.code === 'ENOTFOUND' ? 'dns-failed' : (err.code || 'network'),
+        error: err.code === 'PRIVATE_ADDRESS' ? 'private-address'
+          : err.code === 'ENOTFOUND' ? 'dns-failed' : (err.code || 'network'),
+        address: err.address,
         detail: err.message,
         elapsedMs: Date.now() - started,
       });

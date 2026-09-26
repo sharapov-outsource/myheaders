@@ -16,7 +16,7 @@ import tls from 'node:tls';
 
 import { flag, pace } from '@sharapov/service-kit';
 
-import { request, header } from './http.js';
+import { request, header, guardedLookup, privateLiteral } from './http.js';
 
 const ENCODINGS = ['zstd', 'br', 'gzip', 'deflate'];
 const ALPN_TIMEOUT = Number(process.env.ALPN_TIMEOUT_MS || 8000);
@@ -30,6 +30,10 @@ const ALPN_TIMEOUT = Number(process.env.ALPN_TIMEOUT_MS || 8000);
  * and the connection is closed without a byte of HTTP crossing it.
  */
 async function negotiateAlpn(hostname, port = 443) {
+  /* The host has been fetched already, but it is resolved again here, and a
+     name can answer differently the second time. Same guard as every other
+     socket this service opens. */
+  if (privateLiteral(hostname)) return null;
   await pace('http');
   return new Promise(resolve => {
     let settled = false;
@@ -47,6 +51,7 @@ async function negotiateAlpn(hostname, port = 443) {
       servername: hostname,
       ALPNProtocols: ['h2', 'http/1.1'],
       rejectUnauthorized: false,
+      lookup: guardedLookup,
     });
     const timer = setTimeout(() => finish(null), ALPN_TIMEOUT);
     socket.once('secureConnect', () => finish({
